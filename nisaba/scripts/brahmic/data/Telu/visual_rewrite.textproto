@@ -51,3 +51,151 @@ item {
   uname: ["BA", "SIGN U", "SIGN U"] raw: "బుు"
   to_uname: "VOCALIC R" to_raw: "ఋ"
 }
+
+# the following usages were found in the Sangraha corpus
+
+item {
+  uname: ["SIGN U", "SIGN AA"] raw: "ుా"
+  to_uname: "SIGN UU" to_raw: "ూ"
+}
+
+# alternate ways of writing O/OO for MA
+
+item {
+  uname: ["MA", "SIGN E", "SIGN U"] raw: "మెు"
+  to_uname: ["MA", "SIGN O"] to_raw: "మొ"
+}
+
+
+item {
+  uname: ["MA", "SIGN E", "SIGN AA"] raw: "మెా"
+  to_uname: ["MA", "SIGN OO"] to_raw: "మో"
+}
+
+#TODO: more complicted rewrites involving VA and MA will probably show up later
+# once the wayback machine content is pulled in
+item {
+  uname: ["VA", "SIGN E", "SIGN U"] raw: "వెు"
+  to_uname: ["MA", "SIGN E"] to_raw: "మె"
+}
+
+item {
+  uname: ["VA", "SIGN E", "SIGN U", "SIGN U"] raw: "వెుు"
+  to_uname: ["MA", "SIGN O"] to_raw: "మొ"
+}
+
+item {
+  uname: ["VA", "SIGN E", "SIGN UU"] raw: "వెూ" 
+  to_uname: ["MA", "SIGN OO"] to_raw: "మో"
+}
+
+item {
+  uname: ["VA", "SIGN I", "SIGN U"] raw: "విు" 
+  to_uname: ["MA", "SIGN I"] to_raw: "మి"
+}
+
+item {
+  uname: ["VA", "SIGN VIRAMA", "SIGN U"] raw: "వ్ు"
+  to_uname: ["MA", "SIGN VIRAMA"] to_raw: "మ్"
+}
+
+# alternate ways of writing O/OO for YA
+
+item {
+  uname: ["YA", "SIGN E", "SIGN U"] raw: "యెు"
+  to_uname: ["YA", "SIGN O"] to_raw: "యొ"
+}
+
+# seen on the internets, but harbuzz barely joins them
+item {
+  uname: ["YA", "SIGN E", "SIGN AA"] raw: "యెా"
+  to_uname: ["YA", "SIGN OO"] to_raw: "యో"
+}
+
+
+
+# harfbuzz not combining these.. and also not seen in corpus
+#item {
+#  uname: ["JHA", "SIGN E", "SIGN U"] raw: ""
+#  to_uname: ["JHA", "SIGN O"] to_raw: ""
+#}
+
+#item {
+#  uname: ["JHA", "SIGN E", "SIGN AA"] raw: ""
+#  to_uname: ["JHA", "SIGN OO"] to_raw: ""
+#}
+
+
+# Not sure about these two, both ways of writing/displaying ho/hoo
+# can be seen on the internet
+# TODO: see if this is ok for OCR dataset cleanup
+
+item {
+  uname: ["HA", "SIGN E", "SIGN U"] raw: "హెు"
+  to_uname: ["HA", "SIGN O"] to_raw: "హొ"
+}
+
+item {
+  uname: ["HA", "SIGN E", "SIGN UU"] raw: "హెూ"
+  to_uname: ["HA", "SIGN OO"] to_raw: "హో"
+}
+
+# Usage of PHA to write GHA
+
+# harfbuzz doesn't combine this one - but seen in corpus
+item {
+  uname: ["PHA", "SIGN VIRAMA", "SIGN U"] raw: "ఫ్ు"
+  to_uname: ["GHA", "SIGN VIRAMA"] to_raw: "ఘ్"
+}
+
+item {
+  uname: ["PHA", "SIGN I", "SIGN U"] raw: "ఫిు"
+  to_uname: ["GHA", "SIGN I"] to_raw: "ఘి"
+}
+
+item {
+  uname: ["PHA", "SIGN II", "SIGN U"] raw: "ఫీు"
+  to_uname: ["GHA", "SIGN II"] to_raw: "ఘీ"
+}
+
+item {
+  uname: ["PHA", "SIGN E", "SIGN U"] raw: "ఫెు"
+  to_uname: ["GHA", "SIGN E"] to_raw: "ఘె"
+}
+
+item {
+  uname: ["PHA", "SIGN EE", "SIGN U"] raw: "ఫేు"
+  to_uname: ["GHA", "SIGN EE"] to_raw: "ఘే"
+}
+
+# spelling mistake corrections of invalid clusters
+# TODO: see if this is ok for OCR dataset cleanup
+# These probably shouldn't be handled here
+item {
+  uname: ["YA", "SIGN I", "SIGN U"] raw: "యిు"
+  to_uname: ["YA", "SIGN I"] to_raw: "యి"
+}
+
+# this seems to be the most common mistake, wonder if it is an alternate form
+item {
+  uname: ["VA", "SIGN I", "SIGN UU"] raw: "విూ"
+  to_uname: ["MA", "SIGN II"] to_raw: "మీ"
+}
+
+item {
+  uname: ["MA", "SIGN E", "SIGN UU"] raw: "మెూ"
+  to_uname: ["MA", "SIGN OO"] to_raw: "మో"
+}
+
+# other known problems (caused by OCR?)
+
+# handled
+# DIGIT ZERO confused with SIGN ANUSWARA
+# COLON confused with VISARGA ( this one is probably a result of unconditional replacement of colon with VISARGA in IndicNLP normalization )
+
+# not handled
+# REPH confused with DIGIT NINE
+# NAKAARAM POLLU confused with DIGIT NINE
+# SIGN AVAGRAHA confused with FRACTION DIGIT TWO FOR EVEN POWERS OF FOUR
+# LETTER VOCALIC R confused with LETTER VOCALIC R + SIGN U
+# LETTER BA + SIGN U confused with LETTER VOCALIC R + SIGN U
