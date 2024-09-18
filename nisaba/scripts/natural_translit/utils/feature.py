@@ -377,12 +377,11 @@ class Feature(ty.Thing):
       if values1 not in self or values2 not in self:
         return Feature.ERROR_DISTANCE
       delta = self._items.index(values2) - self._items.index(values1)
-      match self.list_type:
-        case Feature.ValueListType.EQUIDISTANT:
+      if self.list_type == Feature.ValueListType.EQUIDISTANT:
           return self.step
-        case Feature.ValueListType.LINEAR:
+      if self.list_type == Feature.ValueListType.LINEAR:
           return delta * self.step
-        case Feature.ValueListType.CYCLIC:
+      if self.list_type == Feature.ValueListType.CYCLIC:
           return min(delta, len(self) - delta) * self.step
       return Feature.ERROR_DISTANCE
 

@@ -20,7 +20,7 @@ Avoids equating NoneTypes in comparisons. For example if a.features = None and
 b.features = None, a and b won't be evaluated as having the same features.
 """
 
-from typing import Any, Iterable, Type, TypeVar, Union
+from typing import Any, Iterable, Type, TypeVar, Union, get_args, get_origin
 import pynini as pyn
 from nisaba.scripts.natural_translit.utils import log_op as log
 
@@ -160,6 +160,13 @@ ListOrNothing = Union[list, Nothing]
 SetOrNothing = Union[set, Nothing]
 TypeOrNothing = Union[Type, Nothing]
 
+# function to deal with the fact that isinstance doesn't work with unions
+# in older python versions
+def isinstanceof(item, item_type):
+  if get_origin(item_type) is Union:
+      return any([isinstanceof(item, arg) for arg in get_args(item_type)])
+  else:
+      return isinstance(item, item_type)
 
 class IterableThing(Thing):
   """Parent class for iterable Things.
@@ -232,7 +239,7 @@ class IterableThing(Thing):
         self._item_type is Any
         and not isinstance(item, Nothing)
         and type(self) is not type(item)
-    ) or (self._item_type is not Any and isinstance(item, self._item_type))
+    ) or (self._item_type is not Any and isinstanceof(item, self._item_type))
 
   def add(self, *items: ...) -> 'IterableThing':
     for item in items:
@@ -304,7 +311,7 @@ def is_equal(
   """
   # Check Fst first, otherwise if Fst == Non-FstLike raises error.
   if isinstance(obj1, pyn.Fst) or isinstance(obj2, pyn.Fst):
-    if not isinstance(obj1, FstLike) or not isinstance(obj2, FstLike):
+    if not isinstanceof(obj1, FstLike) or not isinstanceof(obj2, FstLike):
       return log.dbg_return_false(log.class_and_texts(obj1, obj2))
     if is_string(obj1) and is_string(obj2):
       return log.dbg_return(

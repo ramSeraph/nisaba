@@ -86,7 +86,7 @@ class FstList(ty.IterableThing):
       Self
     """
     for arg in args:
-      if isinstance(arg, ty.FstLike):
+      if ty.isinstanceof(arg, ty.FstLike):
         self._items.append(arg if isinstance(arg, pyn.Fst) else pyn.accep(arg))
       elif isinstance(arg, Iterable):
         self.add(*arg)
