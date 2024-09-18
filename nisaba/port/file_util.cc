@@ -82,7 +82,7 @@ std::string JoinPath(absl::string_view dirname, absl::string_view basename) {
 
 std::string TempFilePath(absl::string_view filename) {
 #if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_13_0
-  return absl::StrCat("/tmp", filename);
+  return absl::StrCat("/tmp/", filename);
 #else
   const std::filesystem::path tmp_dir = std::filesystem::temp_directory_path();
   std::filesystem::path file_path = tmp_dir / std::string(filename);
