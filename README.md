@@ -142,6 +142,36 @@ pip (20.1.1).
     bazel test -c opt ...
     ```
 
+### Manual FAR release workflow
+
+The `build-fix` branch carries the Bazel compatibility fixes and helper scripts
+needed to build and publish the generated `.far` files from GitHub Actions
+without changing the default CI behavior on `main`.
+
+The `.github/workflows/release-fars.yml` workflow exists only for that purpose.
+It is a separate manual-only workflow (`workflow_dispatch`) and is intended to
+be started with the GitHub CLI while the workflow file lives only on
+`build-fix`:
+
+```shell
+gh workflow run .github/workflows/release-fars.yml --repo ramSeraph/nisaba --ref build-fix
+```
+
+The workflow runs on a Linux runner, checks out the `build-fix` branch, builds
+the FAR-producing grammar targets with Bazel, and publishes one GitHub release
+per FAR directory under `nisaba/scripts`:
+
+*   `abjad_alphabet`
+*   `brahmic`
+*   `natural_translit/deromanization`
+*   `natural_translit/g2p`
+*   `natural_translit/languages`
+*   `natural_translit/romanization`
+
+Each release name uses the directory slug plus the upstream base commit that
+`build-fix` is based on, for example
+`natural_translit-romanization-upstream-<commit_6letters>`.
+
 ## Contributions
 
 NOTE: We don't accept pull requests (PRs) at the moment.

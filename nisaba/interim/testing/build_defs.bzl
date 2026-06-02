@@ -23,7 +23,7 @@ Sample usage:
     )
 """
 
-load("//third_party/bazel_rules/rules_cc/cc:cc_test.bzl", "cc_test")
+load("@rules_cc//cc:defs.bzl", "cc_test")
 
 def _GetFarParams(basename, grammar):
     """Determine full FAR target/path."""
